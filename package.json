@@ -1,0 +1,66 @@
+{
+  "name": "momit-full-stack-js-assignment",
+  "version": "1.0.0",
+  "description": "A simple e-commerce website for Cefalo full stack web developer assignment",
+  "main": "server.js",
+  "scripts": {
+    "watch-server": "nodemon --watch server",
+    "watch-client": "parcel watch client/index.html",
+    "build-client": "parcel build client/index.html",
+    "start": "npm run watch-server & npm run watch-client",
+    "prod": "npm run build-client && node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/momitrahman/momit-full-stack-js-assignment.git"
+  },
+  "keywords": [
+    "javascript",
+    "node",
+    "express",
+    "mongodb",
+    "react"
+  ],
+  "author": "Momit Rahman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/momitrahman/momit-full-stack-js-assignment/issues"
+  },
+  "homepage": "https://github.com/momitrahman/momit-full-stack-js-assignment#readme",
+  "dependencies": {
+    "@chakra-ui/react": "^1.1.2",
+    "@emotion/react": "^11.1.4",
+    "@emotion/styled": "^11.0.0",
+    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-mongo-sanitize": "^2.0.1",
+    "framer-motion": "^3.1.4",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.10",
+    "morgan": "^1.10.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-redux": "^7.2.2",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "eslint": "^7.17.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "nodemon": "^2.0.6",
+    "parcel-bundler": "^1.12.4",
+    "prettier": "^2.2.1"
+  }
+}

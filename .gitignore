@@ -1,0 +1,10 @@
+# dependencies
+/node_modules
+
+# client
+/dist
+.cache
+
+# misc
+.env
+package-lock.json
