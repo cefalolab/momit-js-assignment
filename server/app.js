@@ -1,6 +1,11 @@
 const express = require('express');
 const morgan = require('morgan');
+const mongoSanitize = require('express-mongo-sanitize');
+
 const { NODE_ENV } = require('../config');
+
+// router
+const userRouter = require('./routes/user.routes');
 
 const app = express();
 const CURRENT_WORKING_DIR = process.cwd();
@@ -9,14 +14,11 @@ const CURRENT_WORKING_DIR = process.cwd();
 if (NODE_ENV !== 'production') {
   app.use(morgan('dev'));
 }
+app.use(express.json());
+app.use(mongoSanitize());
 
 // routes
-app.use('/api', (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    message: 'You are browsing e-commerce backend api.',
-  });
-});
+app.use('/api', userRouter);
 
 // Serve front-end
 app.use(express.static(`${CURRENT_WORKING_DIR}/dist`));
