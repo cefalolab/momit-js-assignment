@@ -1,8 +1,17 @@
-const { NODE_ENV, PORT, DOMAIN_NAME, DATABASE_URI } = process.env;
+const {
+  NODE_ENV,
+  PORT,
+  DOMAIN_NAME,
+  DATABASE_URI,
+  JWT_SECRET,
+  JWT_EXPIRES_IN,
+} = process.env;
 
 module.exports = {
   NODE_ENV,
   PORT,
   DOMAIN_NAME,
   DATABASE_URI,
+  JWT_SECRET,
+  JWT_EXPIRES_IN,
 };

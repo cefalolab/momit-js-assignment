@@ -6,6 +6,7 @@ const { NODE_ENV } = require('../config');
 
 // router
 const userRouter = require('./routes/user.routes');
+const authRouter = require('./routes/auth.routes');
 
 const app = express();
 const CURRENT_WORKING_DIR = process.cwd();
@@ -19,6 +20,7 @@ app.use(mongoSanitize());
 
 // routes
 app.use('/api', userRouter);
+app.use('/api', authRouter);
 
 // Serve front-end
 app.use(express.static(`${CURRENT_WORKING_DIR}/dist`));
