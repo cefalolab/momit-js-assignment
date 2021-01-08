@@ -11,7 +11,7 @@ exports.login = async (req, res) => {
         message: 'Please provide email and password',
       });
     }
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select('-createdAt -updatedAt');
 
     // verify password
     const isValidPassword = await user.validPassword(password);
@@ -24,6 +24,8 @@ exports.login = async (req, res) => {
 
     // send token
     const token = user.generateJwt();
+
+    user.password = undefined;
 
     res.status(200).json({
       status: 'success',

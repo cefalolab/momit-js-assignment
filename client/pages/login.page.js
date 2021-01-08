@@ -10,13 +10,19 @@ import {
 } from '@chakra-ui/react';
 
 import isEmail from 'validator/lib/isEmail';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { postData } from '../helper/api-handler';
 import API from '../helper/api-list';
+
+import { loginUser } from '../redux/modules/auth.store';
+import { setLocalItem } from '../helper/local-storage-handler';
+
 import AuthWrapper from '../components/auth-wrapper.component';
 
-function LoginPage() {
+function LoginPage({ dispatch }) {
+  const history = useHistory();
   // states
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -39,17 +45,23 @@ function LoginPage() {
       password,
     };
     postData(`${API.login}`, data)
-      .then(() => {
-        setEmail('');
-        setPassword('');
-        setShowLoader(false);
+      .then(({ data }) => {
         toast({
           title: 'Success',
           description: 'Login successfully.',
           status: 'success',
-          duration: 10000,
+          duration: 5000,
           isClosable: true,
         });
+
+        //  update redux store
+        const { token, user } = data.data;
+        setLocalItem('token', token);
+        setLocalItem('user', user);
+        dispatch(loginUser(token, user));
+
+        // redirect to home
+        history.push('/');
       })
       .catch(err => {
         setShowLoader(false);
@@ -57,7 +69,7 @@ function LoginPage() {
           title: 'Error',
           description: 'Login Failed',
           status: 'error',
-          duration: 10000,
+          duration: 5000,
           isClosable: true,
         });
         console.log(err);
@@ -116,4 +128,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default connect()(LoginPage);
