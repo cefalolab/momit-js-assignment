@@ -4,7 +4,7 @@ exports.register = async (req, res) => {
   try {
     const user = await User.create(req.body);
 
-    delete user.password;
+    user.password = undefined;
 
     res.status(201).json({
       status: 'success',

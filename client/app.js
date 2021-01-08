@@ -1,11 +1,15 @@
 import React from 'react';
-import { Center } from '@chakra-ui/react';
+import { Switch, Route } from 'react-router-dom';
+
+import RegisterPage from './pages/register.page';
 
 function App() {
   return (
-    <Center bg='gray.600' color='white' h='100vh'>
-      You are browsing e-commerce front-end
-    </Center>
+    <Switch>
+      <Route exact path='/register'>
+        <RegisterPage />
+      </Route>
+    </Switch>
   );
 }
 

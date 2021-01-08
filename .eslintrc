@@ -1,11 +1,14 @@
 {
-  "extends": [
-    "airbnb",
-    "airbnb/hooks",
-    "plugin:prettier/recommended",
-    "plugin:node/recommended"
+  "extends": ["airbnb", "airbnb/hooks", "plugin:prettier/recommended"],
+  "overrides": [
+    {
+      "files": ["server/**/*.js", "*.js"],
+      "excludedFiles": "client/**/*.js",
+      "extends": ["plugin:node/recommended"]
+    }
   ],
   "rules": {
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "react/jsx-filename-extension": "off"
   }
 }
