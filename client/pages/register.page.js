@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
 import {
-  Center,
-  Stack,
-  Box,
   InputGroup,
   Input,
   InputRightElement,
   Button,
-  Icon,
   Text,
   Link,
   useToast,
 } from '@chakra-ui/react';
-import { IoPawSharp } from 'react-icons/io5';
 import isEmail from 'validator/lib/isEmail';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { postData } from '../helper/api-handler';
 import API from '../helper/api-list';
+import AuthWrapper from '../components/auth-wrapper.component';
 
 function RegisterPage() {
   // states
@@ -52,7 +48,7 @@ function RegisterPage() {
         setIsRegistering(false);
         toast({
           title: 'Successful',
-          description: 'Registered account successfully.',
+          description: 'Registered user account successfully.',
           status: 'success',
           duration: 10000,
           isClosable: true,
@@ -62,7 +58,7 @@ function RegisterPage() {
         setIsRegistering(false);
         toast({
           title: 'Error',
-          description: 'Unable to create user account',
+          description: 'Unable to register user account',
           status: 'warning',
           duration: 10000,
           isClosable: true,
@@ -82,61 +78,54 @@ function RegisterPage() {
       : true;
 
   return (
-    <Center height='100vh'>
-      <Box padding={10} borderWidth='1px' borderRadius='lg'>
-        <Stack spacing={5}>
-          <Center>
-            <Icon as={IoPawSharp} height={55} width={55} boxSize={50} />
-          </Center>
-          <Input
-            type='text'
-            placeholder='Name'
-            name='name'
-            value={name}
-            onChange={handleName}
-            isInvalid={isNameInvalid}
-          />
-          <Input
-            type='email'
-            placeholder='Email'
-            name='email'
-            value={email}
-            onChange={handleEmail}
-            isInvalid={isEmailInvalid}
-          />
-          <InputGroup size='md'>
-            <Input
-              type={showPassword ? 'text' : 'password'}
-              placeholder='Password'
-              name='password'
-              value={password}
-              onChange={handlePassword}
-              isInvalid={isPasswordInvalid}
-            />
-            <InputRightElement width='4.5rem'>
-              <Button h='1.75rem' size='sm' onClick={handleShowPassword}>
-                {showPassword ? 'Hide' : 'Show'}
-              </Button>
-            </InputRightElement>
-          </InputGroup>
-          <Button
-            colorScheme='teal'
-            onClick={register}
-            isDisabled={isRegisterBtnDisable}
-            isLoading={isRegistering}
-          >
-            Register
+    <AuthWrapper>
+      <Input
+        type='text'
+        placeholder='Name'
+        name='name'
+        value={name}
+        onChange={handleName}
+        isInvalid={isNameInvalid}
+      />
+      <Input
+        type='email'
+        placeholder='Email'
+        name='email'
+        value={email}
+        onChange={handleEmail}
+        isInvalid={isEmailInvalid}
+      />
+      <InputGroup size='md'>
+        <Input
+          type={showPassword ? 'text' : 'password'}
+          placeholder='Password'
+          name='password'
+          value={password}
+          onChange={handlePassword}
+          isInvalid={isPasswordInvalid}
+        />
+        <InputRightElement width='4.5rem'>
+          <Button h='1.75rem' size='sm' onClick={handleShowPassword}>
+            {showPassword ? 'Hide' : 'Show'}
           </Button>
+        </InputRightElement>
+      </InputGroup>
+      <Button
+        colorScheme='teal'
+        onClick={register}
+        isDisabled={isRegisterBtnDisable}
+        isLoading={isRegistering}
+      >
+        Register
+      </Button>
 
-          <Text casing='uppercase' textAlign='center' fontSize='xs'>
-            Do you have an account?
-            <Link color='teal.500' marginLeft='1' as={RouterLink} to='/login'>
-              Log In
-            </Link>
-          </Text>
-        </Stack>
-      </Box>
-    </Center>
+      <Text casing='uppercase' textAlign='center' fontSize='xs'>
+        Do you have an account?
+        <Link color='teal.500' marginLeft='1' as={RouterLink} to='/login'>
+          Log In
+        </Link>
+      </Text>
+    </AuthWrapper>
   );
 }
 

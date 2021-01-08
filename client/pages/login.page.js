@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
 import {
-  Center,
-  Stack,
-  Box,
   InputGroup,
   Input,
   InputRightElement,
   Button,
-  Icon,
   Text,
   Link,
   useToast,
 } from '@chakra-ui/react';
-import { IoPawSharp } from 'react-icons/io5';
+
 import isEmail from 'validator/lib/isEmail';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { postData } from '../helper/api-handler';
 import API from '../helper/api-list';
+import AuthWrapper from '../components/auth-wrapper.component';
 
 function LoginPage() {
   // states
@@ -75,60 +72,47 @@ function LoginPage() {
     email && password ? isEmailInvalid || isPasswordInvalid : true;
 
   return (
-    <Center height='100vh'>
-      <Box padding={10} borderWidth='1px' borderRadius='lg'>
-        <Stack spacing={5}>
-          <Center>
-            <Icon as={IoPawSharp} height={55} width={55} boxSize={50} />
-          </Center>
-
-          <Input
-            type='email'
-            placeholder='Email'
-            name='email'
-            value={email}
-            onChange={handleEmail}
-            isInvalid={isEmailInvalid}
-          />
-          <InputGroup size='md'>
-            <Input
-              type={showPassword ? 'text' : 'password'}
-              placeholder='Password'
-              name='password'
-              value={password}
-              onChange={handlePassword}
-              isInvalid={isPasswordInvalid}
-            />
-            <InputRightElement width='4.5rem'>
-              <Button h='1.75rem' size='sm' onClick={handleShowPassword}>
-                {showPassword ? 'Hide' : 'Show'}
-              </Button>
-            </InputRightElement>
-          </InputGroup>
-
-          <Button
-            colorScheme='teal'
-            onClick={register}
-            isDisabled={isRegisterBtnDisable}
-            isLoading={showLoader}
-          >
-            LOG IN
+    <AuthWrapper>
+      <Input
+        type='email'
+        placeholder='Email'
+        name='email'
+        value={email}
+        onChange={handleEmail}
+        isInvalid={isEmailInvalid}
+      />
+      <InputGroup size='md'>
+        <Input
+          type={showPassword ? 'text' : 'password'}
+          placeholder='Password'
+          name='password'
+          value={password}
+          onChange={handlePassword}
+          isInvalid={isPasswordInvalid}
+        />
+        <InputRightElement width='4.5rem'>
+          <Button h='1.75rem' size='sm' onClick={handleShowPassword}>
+            {showPassword ? 'Hide' : 'Show'}
           </Button>
+        </InputRightElement>
+      </InputGroup>
 
-          <Text casing='uppercase' textAlign='center' fontSize='xs'>
-            Don&apos;t have an account
-            <Link
-              color='teal.500'
-              marginLeft='1'
-              as={RouterLink}
-              to='/register'
-            >
-              sign up
-            </Link>
-          </Text>
-        </Stack>
-      </Box>
-    </Center>
+      <Button
+        colorScheme='teal'
+        onClick={register}
+        isDisabled={isRegisterBtnDisable}
+        isLoading={showLoader}
+      >
+        LOG IN
+      </Button>
+
+      <Text casing='uppercase' textAlign='center' fontSize='xs'>
+        Don&apos;t have an account
+        <Link color='teal.500' marginLeft='1' as={RouterLink} to='/register'>
+          Register
+        </Link>
+      </Text>
+    </AuthWrapper>
   );
 }
 
