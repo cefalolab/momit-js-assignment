@@ -13,6 +13,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 import { postData } from '../helper/api-handler';
 import API from '../helper/api-list';
+
 import AuthWrapper from '../components/auth-wrapper.component';
 
 function RegisterPage() {
@@ -116,7 +117,7 @@ function RegisterPage() {
         isDisabled={isRegisterBtnDisable}
         isLoading={isRegistering}
       >
-        Register
+        REGISTER
       </Button>
 
       <Text casing='uppercase' textAlign='center' fontSize='xs'>

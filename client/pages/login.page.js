@@ -8,14 +8,13 @@ import {
   Link,
   useToast,
 } from '@chakra-ui/react';
-
+import PropTypes from 'prop-types';
 import isEmail from 'validator/lib/isEmail';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { postData } from '../helper/api-handler';
 import API from '../helper/api-list';
-
 import { loginUser } from '../redux/modules/auth.store';
 import { setLocalItem } from '../helper/local-storage-handler';
 
@@ -121,11 +120,15 @@ function LoginPage({ dispatch }) {
       <Text casing='uppercase' textAlign='center' fontSize='xs'>
         Don&apos;t have an account
         <Link color='teal.500' marginLeft='1' as={RouterLink} to='/register'>
-          Register
+          REGISTER
         </Link>
       </Text>
     </AuthWrapper>
   );
 }
+
+LoginPage.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
 
 export default connect()(LoginPage);

@@ -7,6 +7,10 @@ export function loginUser(token, user) {
   return { type: LOGIN, payload: { token, user } };
 }
 
+export function logoutUser() {
+  return { type: LOGOUT };
+}
+
 // Reducer
 const initialState = {
   loggedIn: false,

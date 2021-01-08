@@ -4,10 +4,12 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { getLocalItem } from './helper/local-storage-handler';
+import { loginUser } from './redux/modules/auth.store';
 
 import RegisterPage from './pages/register.page';
 import LoginPage from './pages/login.page';
-import { loginUser } from './redux/modules/auth.store';
+import HomePage from './pages/home.page';
+import Header from './container/header.container';
 
 function App({ loggedIn, dispatch }) {
   useEffect(() => {
@@ -19,33 +21,39 @@ function App({ loggedIn, dispatch }) {
   // public routes only
   if (!loggedIn) {
     return (
-      <Switch>
-        <Route exact path='/'>
-          Home Page
-        </Route>
-        <Route exact path='/login'>
-          <LoginPage />
-        </Route>
-        <Route exact path='/register'>
-          <RegisterPage />
-        </Route>
-        <Route>
-          <Redirect exact to='/' />
-        </Route>
-      </Switch>
+      <>
+        <Header />
+        <Switch>
+          <Route exact path='/'>
+            <HomePage />
+          </Route>
+          <Route exact path='/login'>
+            <LoginPage />
+          </Route>
+          <Route exact path='/register'>
+            <RegisterPage />
+          </Route>
+          <Route>
+            <Redirect exact to='/' />
+          </Route>
+        </Switch>
+      </>
     );
   }
 
   // private routes with some public routes
   return (
-    <Switch>
-      <Route exact path='/'>
-        Home Page
-      </Route>
-      <Route>
-        <Redirect exact to='/' />
-      </Route>
-    </Switch>
+    <>
+      <Header />
+      <Switch>
+        <Route exact path='/'>
+          <HomePage />
+        </Route>
+        <Route>
+          <Redirect exact to='/' />
+        </Route>
+      </Switch>
+    </>
   );
 }
 
