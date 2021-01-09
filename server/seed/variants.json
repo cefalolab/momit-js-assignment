@@ -91,7 +91,7 @@
   },
   {
     "productId": "9",
-    "color": "white",
+    "color": "green",
     "size": ["medium", "large", "extra-large"],
     "quantity": "5"
   },
