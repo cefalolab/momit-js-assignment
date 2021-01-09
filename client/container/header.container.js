@@ -7,6 +7,7 @@ import { IoCartOutline, IoPersonOutline } from 'react-icons/io5';
 
 import Logo from '../components/logo.component';
 import UserMenu from './user-menu.container';
+import Cart from './cart.container';
 
 function Header({ loggedIn }) {
   const CartIcon = () => (
@@ -26,7 +27,7 @@ function Header({ loggedIn }) {
       <Box paddingRight='10'>
         {/* checkout */}
         <Link to='/checkout'>
-          <CartIcon />
+          <Cart icon={<CartIcon />} />
         </Link>
 
         {/* user  */}

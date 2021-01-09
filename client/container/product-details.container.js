@@ -20,10 +20,13 @@ import {
   IoCashOutline,
   IoSadOutline,
 } from 'react-icons/io5';
+import { connect } from 'react-redux';
+
 import { getData } from '../helper/api-handler';
 import API from '../helper/api-list';
+import { addToCart } from '../redux/modules/cart.store';
 
-function ProductDetails({ id }) {
+function ProductDetails({ id, cart, dispatch }) {
   // custom hooks
   const toast = useToast();
 
@@ -58,6 +61,35 @@ function ProductDetails({ id }) {
   // event handlers
   const selectColor = color => setColor(color);
   const selectSize = size => setSize(size);
+  const onAddToCart = () => {
+    // product title
+    const { name } = product;
+    const title = `${name} - ${color} color, ${size}`;
+
+    // check item exist in cart
+    const uniqueId = `${id}.${color}.${size}}`;
+    const isItemExist = Boolean(cart.find(item => item.id === uniqueId));
+
+    if (isItemExist) {
+      toast({
+        title: 'Warning',
+        description: `${title} size already added to your cart`,
+        status: 'warning',
+        duration: '3000',
+        isClosable: true,
+      });
+      return;
+    }
+    // update cart for new item
+    dispatch(addToCart(id, { color, size }));
+    toast({
+      title: 'Success',
+      description: `${title} added to cart successfully.`,
+      status: 'success',
+      duration: '3000',
+      isClosable: true,
+    });
+  };
 
   // render start from here
   if (loading) {
@@ -74,7 +106,7 @@ function ProductDetails({ id }) {
   const colors = variants.map(item => item.color);
   const sizes = (() => {
     const variant = variants.find(variant => {
-      const currentColor = color || colors[1];
+      const currentColor = color || colors[0];
       if (currentColor !== color) {
         setColor(currentColor);
       }
@@ -150,17 +182,19 @@ function ProductDetails({ id }) {
               </Text>
               <Spacer />
             </Flex>
-            <Center marginTop={5}>
+            <Flex marginTop={5}>
               <Button
-                width='50%'
                 colorScheme='teal'
                 variant='outline'
                 size='sm'
                 textTransform='uppercase'
+                disabled={!(color && size)}
+                onClick={onAddToCart}
               >
                 Add to cart
               </Button>
-            </Center>
+              <Spacer />
+            </Flex>
           </div>
         ) : (
           <Flex flexDirection='column' alignItems='center'>
@@ -177,6 +211,10 @@ function ProductDetails({ id }) {
 
 ProductDetails.propTypes = {
   id: PropTypes.number.isRequired,
+  cart: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-export default ProductDetails;
+const mapStateToProps = store => ({ cart: store.cart });
+
+export default connect(mapStateToProps)(ProductDetails);

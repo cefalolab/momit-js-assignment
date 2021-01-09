@@ -13,7 +13,7 @@ import ProductDetails from '../container/product-details.container';
 
 function HomePage() {
   // states
-  const [activeProductId, setActiveProductId] = useState('');
+  const [activeProductId, setActiveProductId] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // effects
@@ -26,7 +26,10 @@ function HomePage() {
   }, [activeProductId]);
 
   // event handlers
-  const onModalClose = () => setIsModalOpen(false);
+  const onModalClose = () => {
+    setActiveProductId(0);
+    setIsModalOpen(false);
+  };
 
   return (
     <Box marginTop='10' padding='0 10'>
