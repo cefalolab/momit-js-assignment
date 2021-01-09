@@ -8,7 +8,8 @@
     "watch-client": "parcel watch client/index.html",
     "build-client": "parcel build client/index.html",
     "start": "npm run watch-server & npm run watch-client",
-    "prod": "npm run build-client && node server.js"
+    "prod": "npm run build-client && node server.js",
+    "seed": "node server/seed"
   },
   "repository": {
     "type": "git",

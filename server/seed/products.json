@@ -1,0 +1,56 @@
+[
+  {
+    "id": "1",
+    "name": "T-Shirt",
+    "price": "500"
+  },
+  {
+    "id": "2",
+    "name": "Polo T-Shirt",
+    "price": "850"
+  },
+  {
+    "id": "3",
+    "name": "Hoodies",
+    "price": "1400"
+  },
+  {
+    "id": "4",
+    "name": "Sweatshirt",
+    "price": "1250"
+  },
+  {
+    "id": "5",
+    "name": "Formal Shirt",
+    "price": "1950",
+    "available": "false"
+  },
+  {
+    "id": "6",
+    "name": "Casual Shirt",
+    "price": "1650"
+  },
+  {
+    "id": "7",
+    "name": "Jeans",
+    "price": "1800",
+    "available": "false"
+  },
+  {
+    "id": "8",
+    "name": "Chinos",
+    "price": "1550",
+    "available": "false"
+  },
+  {
+    "id": "9",
+    "name": "Joggers",
+    "price": "1050"
+  },
+  {
+    "id": "10",
+    "name": "Shorts",
+    "price": "800",
+    "available": "false"
+  }
+]
