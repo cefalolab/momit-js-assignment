@@ -4,7 +4,7 @@ const REMOVE = 'cart/REMOVE';
 
 // Action Creators
 export function addToCart(productId, variant) {
-  const id = `${productId}.${variant.color}.${variant.size}}`;
+  const id = `${productId}.${variant.color}.${variant.size}`;
   return { type: ADD, payload: { id, productId, variant } };
 }
 
