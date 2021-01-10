@@ -25,6 +25,7 @@ import { connect } from 'react-redux';
 import { getData } from '../helper/api-handler';
 import API from '../helper/api-list';
 import { addToCart } from '../redux/modules/cart.store';
+import { generateCartItemUid } from '../helper/utility';
 
 function ProductDetails({ id, cart, dispatch }) {
   // custom hooks
@@ -63,17 +64,17 @@ function ProductDetails({ id, cart, dispatch }) {
   const selectSize = size => setSize(size);
   const onAddToCart = () => {
     // product title
-    const { name } = product;
-    const title = `${name} - ${color} color, ${size}`;
+    const { name, price, quantity } = product;
+    const title = `${name} - ${color} color, ${size} size`;
 
     // check item exist in cart
-    const uniqueId = `${id}.${color}.${size}}`;
-    const isItemExist = Boolean(cart.find(item => item.id === uniqueId));
+    const uid = generateCartItemUid(id, color, size);
+    const isItemExist = Boolean(cart.find(item => item.uid === uid));
 
     if (isItemExist) {
       toast({
         title: 'Warning',
-        description: `${title} size already added to your cart`,
+        description: `${title} already added to your cart`,
         status: 'warning',
         duration: '3000',
         isClosable: true,
@@ -81,7 +82,7 @@ function ProductDetails({ id, cart, dispatch }) {
       return;
     }
     // update cart for new item
-    dispatch(addToCart(id, { color, size }));
+    dispatch(addToCart(uid, id, name, color, size, price, quantity));
     toast({
       title: 'Success',
       description: `${title} added to cart successfully.`,

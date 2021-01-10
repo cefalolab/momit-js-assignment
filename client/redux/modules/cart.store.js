@@ -1,23 +1,49 @@
 // Actions
 const ADD = 'cart/ADD';
+const UPDATE = 'cart/UPDATE';
 const REMOVE = 'cart/REMOVE';
 
 // Action Creators
-export function addToCart(productId, variant) {
-  const id = `${productId}.${variant.color}.${variant.size}`;
-  return { type: ADD, payload: { id, productId, variant } };
+export function addToCart(uid, id, name, color, size, price) {
+  return {
+    type: ADD,
+    payload: {
+      uid,
+      id,
+      name,
+      color,
+      size,
+      price,
+      quantity: 1,
+      quantityLeft: 0,
+    },
+  };
 }
 
-export function removeFromCart(id) {
-  return { type: REMOVE, payload: { id } };
+export function updateToCart(
+  uid,
+  id,
+  name,
+  color,
+  size,
+  price,
+  quantity,
+  quantityLeft
+) {
+  return {
+    type: UPDATE,
+    payload: {
+      uid,
+      data: { id, name, color, size, price, quantity, quantityLeft },
+    },
+  };
+}
+
+export function removeFromCart(uid) {
+  return { type: REMOVE, payload: { uid } };
 }
 
 // Reducer
-// sample data
-/*
-  {id: String, productId: Number, variant: {color: String, size: String} }
-*/
-
 const initialState = [];
 
 export default function reducer(state = initialState, action = {}) {
@@ -26,14 +52,19 @@ export default function reducer(state = initialState, action = {}) {
       return [
         ...state,
         {
-          id: action.payload.id,
-          productId: action.payload.productId,
-          variant: action.payload.variant,
+          ...action.payload,
         },
       ];
     }
+    case UPDATE:
+      return state.map(item =>
+        item.uid === action.payload.uid
+          ? { ...item, ...action.payload.data }
+          : item
+      );
     case REMOVE:
-      return state.filter(({ id }) => id !== action.payload.id);
+      return state.filter(({ uid }) => uid !== action.payload.uid);
+
     default:
       return state;
   }
