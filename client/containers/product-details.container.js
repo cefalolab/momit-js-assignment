@@ -56,7 +56,7 @@ function ProductDetails({ id, cart, dispatch }) {
           title: 'Error',
           description: 'Login Failed',
           status: 'error',
-          duration: 5000,
+          duration: 3000,
           isClosable: true,
         });
       });
@@ -79,7 +79,7 @@ function ProductDetails({ id, cart, dispatch }) {
         title: 'Warning',
         description: `${title} already added to your cart`,
         status: 'warning',
-        duration: '3000',
+        duration: '5000',
         isClosable: true,
       });
       return;
@@ -90,7 +90,7 @@ function ProductDetails({ id, cart, dispatch }) {
       title: 'Success',
       description: `${title} added to cart successfully.`,
       status: 'success',
-      duration: '3000',
+      duration: '5000',
       isClosable: true,
     });
   };

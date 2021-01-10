@@ -88,7 +88,7 @@ function CheckoutPage({ cart, dispatch }) {
           title: 'Error',
           description: 'Unable to update cart',
           status: 'warning',
-          duration: 10000,
+          duration: 3000,
           isClosable: true,
         });
         console.log(err);
@@ -127,11 +127,15 @@ function CheckoutPage({ cart, dispatch }) {
   };
 
   const onCheckout = () => {
+    cart.forEach(({ uid }) => {
+      dispatch(removeFromCart(uid));
+    });
+
     toast({
       title: 'Success',
       description: 'Your order created successfully. Thank You.',
       status: 'success',
-      duration: 10000,
+      duration: 3000,
       isClosable: true,
     });
   };
@@ -223,7 +227,7 @@ function CheckoutPage({ cart, dispatch }) {
       <Box position='absolute' right='30' marginTop='5'>
         <Text fontSize='lg'>
           Total:
-          {`$${totalPrice}`}
+          {`    $${totalPrice}`}
         </Text>
         <Button
           variant='solid'

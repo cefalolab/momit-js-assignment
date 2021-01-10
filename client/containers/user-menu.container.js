@@ -29,10 +29,10 @@ function UserMenu({ user, loggedIn, dispatch }) {
     history.push('/');
 
     toast({
-      title: 'Info',
+      title: 'Success',
       description: 'Logout Successfully.',
-      status: 'info',
-      duration: '3000',
+      status: 'success',
+      duration: '5000',
       isClosable: true,
     });
   };

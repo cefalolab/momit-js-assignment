@@ -31,7 +31,7 @@ function Products({ setActiveProductId }) {
           title: 'Error',
           description: 'Something went wrong',
           status: 'error',
-          duration: 5000,
+          duration: 3000,
           isClosable: true,
         });
 

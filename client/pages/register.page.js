@@ -54,7 +54,7 @@ function RegisterPage() {
           title: 'Successful',
           description: 'Registered user account successfully.',
           status: 'success',
-          duration: 5000,
+          duration: 3000,
           isClosable: true,
         });
       })
@@ -64,7 +64,7 @@ function RegisterPage() {
           title: 'Error',
           description: 'Unable to register user account',
           status: 'warning',
-          duration: 5000,
+          duration: 3000,
           isClosable: true,
         });
         console.error(err);

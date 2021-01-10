@@ -54,7 +54,7 @@ function LoginPage({ dispatch }) {
           title: 'Success',
           description: 'Login successfully.',
           status: 'success',
-          duration: 5000,
+          duration: 3000,
           isClosable: true,
         });
 
@@ -73,7 +73,7 @@ function LoginPage({ dispatch }) {
           title: 'Error',
           description: 'Login Failed',
           status: 'error',
-          duration: 5000,
+          duration: 3000,
           isClosable: true,
         });
         console.error(err);
