@@ -22,10 +22,13 @@ import {
 } from 'react-icons/io5';
 import { connect } from 'react-redux';
 
-import { getData } from '../helper/api-handler';
-import API from '../helper/api-list';
+// actions
 import { addToCart } from '../redux/modules/cart.store';
-import { generateCartItemUid } from '../helper/utility';
+
+// helpers
+import { getData } from '../helpers/api-handler';
+import API from '../helpers/api-list';
+import { generateCartItemUid } from '../helpers/utility';
 
 function ProductDetails({ id, cart, dispatch }) {
   // custom hooks

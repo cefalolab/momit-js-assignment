@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useToast, Center, Flex, Box, Spinner, Text } from '@chakra-ui/react';
-import { getData } from '../helper/api-handler';
-import API from '../helper/api-list';
+
+// helpers
+import { getData } from '../helpers/api-handler';
+import API from '../helpers/api-list';
 
 function Products({ setActiveProductId }) {
   // custom hooks

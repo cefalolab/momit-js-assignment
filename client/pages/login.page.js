@@ -13,27 +13,32 @@ import isEmail from 'validator/lib/isEmail';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { postData } from '../helper/api-handler';
-import API from '../helper/api-list';
+// actions
 import { loginUser } from '../redux/modules/auth.store';
-import { setLocalItem } from '../helper/local-storage-handler';
 
+// helpers
+import { postData } from '../helpers/api-handler';
+import API from '../helpers/api-list';
+import { setLocalItem } from '../helpers/local-storage-handler';
+
+// components
 import AuthWrapper from '../components/auth-wrapper.component';
 
 function LoginPage({ dispatch }) {
+  // custom hooks
   const history = useHistory();
+  const toast = useToast();
+
   // states
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
 
-  const toast = useToast();
-
   // event handlers
-  const handleEmail = e => setEmail(e.target.value);
-  const handlePassword = e => setPassword(e.target.value);
-  const handleShowPassword = () => setShowPassword(!showPassword);
+  const onChangeEmail = e => setEmail(e.target.value);
+  const onChangePassword = e => setPassword(e.target.value);
+  const onChangeShowPassword = () => setShowPassword(!showPassword);
 
   // API handlers
   const register = () => {
@@ -71,7 +76,7 @@ function LoginPage({ dispatch }) {
           duration: 5000,
           isClosable: true,
         });
-        console.log(err);
+        console.error(err);
       });
   };
 
@@ -82,6 +87,7 @@ function LoginPage({ dispatch }) {
   const isRegisterBtnDisable =
     email && password ? isEmailInvalid || isPasswordInvalid : true;
 
+  // --- render start ---
   return (
     <AuthWrapper>
       <Input
@@ -89,7 +95,7 @@ function LoginPage({ dispatch }) {
         placeholder='Email'
         name='email'
         value={email}
-        onChange={handleEmail}
+        onChange={onChangeEmail}
         isInvalid={isEmailInvalid}
       />
       <InputGroup size='md'>
@@ -98,11 +104,11 @@ function LoginPage({ dispatch }) {
           placeholder='Password'
           name='password'
           value={password}
-          onChange={handlePassword}
+          onChange={onChangePassword}
           isInvalid={isPasswordInvalid}
         />
         <InputRightElement width='4.5rem'>
-          <Button h='1.75rem' size='sm' onClick={handleShowPassword}>
+          <Button h='1.75rem' size='sm' onClick={onChangeShowPassword}>
             {showPassword ? 'Hide' : 'Show'}
           </Button>
         </InputRightElement>
@@ -118,7 +124,7 @@ function LoginPage({ dispatch }) {
       </Button>
 
       <Text casing='uppercase' textAlign='center' fontSize='xs'>
-        Don&apos;t have an account
+        Don&apos;t have an account?
         <Link color='teal.500' marginLeft='1' as={RouterLink} to='/register'>
           REGISTER
         </Link>

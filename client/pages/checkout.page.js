@@ -25,10 +25,13 @@ import {
 } from '@chakra-ui/react';
 import { IoCartOutline, IoTrashOutline } from 'react-icons/io5';
 
-import { postData } from '../helper/api-handler';
-import API from '../helper/api-list';
-import { getAuthorizationHeader } from '../helper/utility';
+// actions
 import { removeFromCart, updateToCart } from '../redux/modules/cart.store';
+
+// helpers
+import { postData } from '../helpers/api-handler';
+import API from '../helpers/api-list';
+import { withAuthorizationHeader } from '../helpers/utility';
 
 function CheckoutPage({ cart, dispatch }) {
   // custom hooks
@@ -53,7 +56,7 @@ function CheckoutPage({ cart, dispatch }) {
     //  set loader and start fetching data
     setLoading(true);
 
-    postData(`${API.checkout}`, { cart }, getAuthorizationHeader())
+    postData(`${API.checkout}`, { cart }, withAuthorizationHeader())
       .then(({ data }) => {
         setLoading(false);
 
@@ -92,7 +95,7 @@ function CheckoutPage({ cart, dispatch }) {
       });
   }
 
-  // ---- event handlers ----
+  // event handlers
   const onQuantityChange = (uid, action) => {
     const updatedCart = cart.map(item => {
       // inc or dec quantity
@@ -133,7 +136,7 @@ function CheckoutPage({ cart, dispatch }) {
     });
   };
 
-  // ---- render start from here ----
+  // ---- render start ----
   if (loading) {
     return (
       <Center marginTop='10'>

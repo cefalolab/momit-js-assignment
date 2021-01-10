@@ -11,12 +11,17 @@ import {
 import isEmail from 'validator/lib/isEmail';
 import { Link as RouterLink } from 'react-router-dom';
 
-import { postData } from '../helper/api-handler';
-import API from '../helper/api-list';
+// helpers
+import { postData } from '../helpers/api-handler';
+import API from '../helpers/api-list';
 
+// components
 import AuthWrapper from '../components/auth-wrapper.component';
 
 function RegisterPage() {
+  // custom hooks
+  const toast = useToast();
+
   // states
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -24,13 +29,11 @@ function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isRegistering, setIsRegistering] = useState(false);
 
-  const toast = useToast();
-
   // event handlers
-  const handleName = e => setName(e.target.value);
-  const handleEmail = e => setEmail(e.target.value);
-  const handlePassword = e => setPassword(e.target.value);
-  const handleShowPassword = () => setShowPassword(!showPassword);
+  const onChangeName = e => setName(e.target.value);
+  const onChangeEmail = e => setEmail(e.target.value);
+  const onChangePassword = e => setPassword(e.target.value);
+  const onChangeShowPassword = () => setShowPassword(!showPassword);
 
   // API handlers
   const register = () => {
@@ -51,7 +54,7 @@ function RegisterPage() {
           title: 'Successful',
           description: 'Registered user account successfully.',
           status: 'success',
-          duration: 10000,
+          duration: 5000,
           isClosable: true,
         });
       })
@@ -61,10 +64,10 @@ function RegisterPage() {
           title: 'Error',
           description: 'Unable to register user account',
           status: 'warning',
-          duration: 10000,
+          duration: 5000,
           isClosable: true,
         });
-        console.log(err);
+        console.error(err);
       });
   };
 
@@ -78,6 +81,7 @@ function RegisterPage() {
       ? isNameInvalid || isEmailInvalid || isPasswordInvalid
       : true;
 
+  // --- render start ---
   return (
     <AuthWrapper>
       <Input
@@ -85,7 +89,7 @@ function RegisterPage() {
         placeholder='Name'
         name='name'
         value={name}
-        onChange={handleName}
+        onChange={onChangeName}
         isInvalid={isNameInvalid}
       />
       <Input
@@ -93,7 +97,7 @@ function RegisterPage() {
         placeholder='Email'
         name='email'
         value={email}
-        onChange={handleEmail}
+        onChange={onChangeEmail}
         isInvalid={isEmailInvalid}
       />
       <InputGroup size='md'>
@@ -102,11 +106,11 @@ function RegisterPage() {
           placeholder='Password'
           name='password'
           value={password}
-          onChange={handlePassword}
+          onChange={onChangePassword}
           isInvalid={isPasswordInvalid}
         />
         <InputRightElement width='4.5rem'>
-          <Button h='1.75rem' size='sm' onClick={handleShowPassword}>
+          <Button h='1.75rem' size='sm' onClick={onChangeShowPassword}>
             {showPassword ? 'Hide' : 'Show'}
           </Button>
         </InputRightElement>

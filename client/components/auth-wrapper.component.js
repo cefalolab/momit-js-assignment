@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Center, Stack, Box } from '@chakra-ui/react';
 
+// components
 import Logo from './logo.component';
 
 function AuthWrapper({ children }) {

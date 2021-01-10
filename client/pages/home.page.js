@@ -8,8 +8,9 @@ import {
   ModalBody,
 } from '@chakra-ui/react';
 
-import Products from '../container/products.container';
-import ProductDetails from '../container/product-details.container';
+// components
+import Products from '../containers/products.container';
+import ProductDetails from '../containers/product-details.container';
 
 function HomePage() {
   // states
@@ -31,6 +32,7 @@ function HomePage() {
     setIsModalOpen(false);
   };
 
+  // --- render start ---
   return (
     <Box marginTop='10' padding='0 10'>
       <Products setActiveProductId={setActiveProductId} />
