@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoSanitize = require('express-mongo-sanitize');
 
-const { NODE_ENV } = require('../config');
+const { NODE_ENV } = process.env;
 
 // router
 const userRouter = require('./routes/user.routes');

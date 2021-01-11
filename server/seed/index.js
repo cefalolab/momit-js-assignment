@@ -5,8 +5,6 @@ const dotenv = require('dotenv').config();
 const ProductModel = require('../models/product.model');
 const VariantModel = require('../models/variant.model');
 
-const { DATABASE_URI } = require('../../config');
-
 // check .env exist
 if (dotenv.error) {
   throw dotenv.error;
@@ -35,6 +33,7 @@ const actions = async () => {
 };
 
 // Database connection
+const { DATABASE_URI } = process.env;
 mongoose
   .connect(DATABASE_URI, {
     useNewUrlParser: true,

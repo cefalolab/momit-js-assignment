@@ -2,7 +2,8 @@ const dotenv = require('dotenv').config();
 const mongoose = require('mongoose');
 
 const app = require('./server/app');
-const { DATABASE_URI, PORT, NODE_ENV, DOMAIN_NAME } = require('./config');
+
+const { DATABASE_URI, PORT, NODE_ENV, DOMAIN_NAME } = process.env;
 
 // check .env exist
 if (dotenv.error) {
