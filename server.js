@@ -1,13 +1,18 @@
 const dotenv = require('dotenv').config();
+// check .env exist
+if (dotenv.error) {
+  throw dotenv.error;
+}
+
 const mongoose = require('mongoose');
 
 const app = require('./server/app');
 
 const { DATABASE_URI, PORT, NODE_ENV, DOMAIN_NAME } = process.env;
 
-// check .env exist
-if (dotenv.error) {
-  throw dotenv.error;
+// hide console for test mode
+if (NODE_ENV === 'test') {
+  console.log = function () {};
 }
 
 // Database connection
@@ -18,7 +23,7 @@ mongoose
     useFindAndModify: false,
     useUnifiedTopology: true,
   })
-  .then(res => {
+  .then(() => {
     console.log('\nDB connection successful.');
   })
   .catch(err => {
@@ -35,3 +40,5 @@ app.listen(PORT, () => {
     `
   );
 });
+
+module.exports = app;
