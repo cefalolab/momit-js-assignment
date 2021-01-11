@@ -4,14 +4,15 @@ exports.checkout = async (req, res) => {
   try {
     const { cart } = req.body;
     // TODO: cart validation
-    // find  unique product ids
+    // find unique product ids
     const ids = [...new Set(cart.map(item => item.id))];
+
     // find products
     const products = await Product.find({ id: { $in: ids } }).populate(
       'variants'
     );
 
-    // Price with quantity available and selected count per color
+    // Price, available and selected quantity count per color
     const productsBasicInfo = products.map(({ id, price, variants }) => {
       const quantityAvailablePerColor = {};
       variants.forEach(({ color, quantity }) => {

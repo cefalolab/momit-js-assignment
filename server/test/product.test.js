@@ -24,10 +24,10 @@ describe('Product:', () => {
 
   // fetch single products
   describe('GET /products/:id', () => {
-    it('Should get all products', done => {
+    it('Should get single product details', done => {
       chai
         .request(server)
-        .get('/api/products/100')
+        .get('/api/products/1')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
