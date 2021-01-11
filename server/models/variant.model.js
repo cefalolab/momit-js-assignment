@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
+// models
 const Product = require('./product.model');
 
+// helpers
 const isInt = number => validator.isInt(String(number));
 
 const variantSchema = new mongoose.Schema(

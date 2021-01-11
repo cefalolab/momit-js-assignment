@@ -24,6 +24,14 @@ exports.getProduct = async (req, res) => {
     const id = Number(req.params.id);
     const product = await Product.findOne({ id }).populate('variants');
 
+    // for invalid id
+    if (!product) {
+      return res.status(404).json({
+        status: 'failed',
+        message: `No product found with this ${id}`,
+      });
+    }
+
     res.status(200).json({
       status: 'success',
       data: {

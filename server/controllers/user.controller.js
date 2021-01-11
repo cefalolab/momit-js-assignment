@@ -4,6 +4,7 @@ exports.register = async (req, res) => {
   try {
     const user = await User.create(req.body);
 
+    // remove password from response
     user.password = undefined;
 
     res.status(201).json({

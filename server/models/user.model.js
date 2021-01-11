@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
 
+// helpers
 const { JWT_SECRET, JWT_EXPIRES_IN } = process.env;
 
 const userSchema = new mongoose.Schema(

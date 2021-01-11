@@ -15,11 +15,19 @@ exports.login = async (req, res) => {
         message: 'Please provide email and password',
       });
     }
+
     const user = await User.findOne({ email }).select('-createdAt -updatedAt');
+
+    if (!user) {
+      return res.status(401).json({
+        status: 'failed',
+        message: 'Invalid email or password',
+      });
+    }
 
     // verify password
     const isValidPassword = await user.validPassword(password);
-    if (!user || !isValidPassword) {
+    if (!isValidPassword) {
       return res.status(401).json({
         status: 'failed',
         message: 'Invalid email or password',
@@ -29,6 +37,7 @@ exports.login = async (req, res) => {
     // send token
     const token = user.generateJwt();
 
+    // remove password from response
     user.password = undefined;
 
     res.status(200).json({
@@ -48,7 +57,7 @@ exports.login = async (req, res) => {
 
 exports.isAuthorized = async (req, res, next) => {
   try {
-    // token exist
+    // check token exist
     let token;
     if (
       req.headers.authorization &&
